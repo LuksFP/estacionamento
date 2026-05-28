@@ -78,27 +78,27 @@ export function SpotGrid() {
   return (
     <div className="space-y-5">
       {/* Stats bar */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-5">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-sm bg-spot-free" />
-          <span className="text-sm text-white font-medium">{free} livres</span>
+          <span className="text-sm text-slate-900 font-semibold">{free} livres</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-sm bg-spot-occupied" />
           <span className="text-sm text-muted">{occupied} ocupadas</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-sm bg-spot-blocked" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-border-2" />
           <span className="text-sm text-muted">{blocked} bloqueadas</span>
         </div>
-        <div className="ml-auto">
-          <div className="w-40 h-2 bg-surface-3 rounded-full overflow-hidden">
+        <div className="ml-auto text-right">
+          <div className="w-40 h-2 bg-surface-3 rounded-full overflow-hidden border border-border">
             <div
               className="h-full bg-spot-occupied rounded-full transition-all"
               style={{ width: `${(occupied / 50) * 100}%` }}
             />
           </div>
-          <p className="text-xs text-muted mt-1 text-right">{Math.round((occupied / 50) * 100)}% de ocupação</p>
+          <p className="text-xs text-muted mt-1">{Math.round((occupied / 50) * 100)}% de ocupação</p>
         </div>
       </div>
 
@@ -109,24 +109,24 @@ export function SpotGrid() {
             key={spot.id}
             onClick={() => spot.status !== 'blocked' ? setSelected(spot) : undefined}
             className={cn(
-              'relative aspect-square rounded-lg border flex flex-col items-center justify-center transition-all duration-150',
+              'relative aspect-square rounded-lg border flex flex-col items-center justify-center transition-all duration-150 text-xs font-bold',
               spot.status === 'free' && [
-                'bg-spot-free/10 border-spot-free/30 text-spot-free',
-                'hover:bg-spot-free/20 hover:border-spot-free/60 cursor-pointer',
+                'bg-green-50 border-green-200 text-green-700',
+                'hover:bg-green-100 hover:border-green-400 cursor-pointer',
               ],
               spot.status === 'occupied' && [
-                'bg-spot-occupied/10 border-spot-occupied/30 text-spot-occupied',
-                'hover:bg-spot-occupied/20 hover:border-spot-occupied/60 cursor-pointer',
+                'bg-red-50 border-red-200 text-red-700',
+                'hover:bg-red-100 hover:border-red-400 cursor-pointer',
               ],
               spot.status === 'blocked' && [
-                'bg-spot-blocked/40 border-spot-blocked/30 text-muted-2 cursor-default',
+                'bg-slate-100 border-slate-200 text-slate-400 cursor-default',
               ],
               selected?.id === spot.id && 'ring-2 ring-accent ring-offset-1 ring-offset-background',
             )}
           >
-            <span className="text-xs font-bold tabular-nums">{spot.number}</span>
+            <span className="tabular-nums">{spot.number}</span>
             {spot.status === 'occupied' && (
-              <span className="absolute bottom-1 left-0 right-0 text-center text-[8px] font-mono text-spot-occupied/70 px-0.5 truncate">
+              <span className="absolute bottom-0.5 left-0 right-0 text-center text-[7px] font-mono text-red-400 px-0.5 truncate leading-tight">
                 {spot.plate?.slice(0, 7)}
               </span>
             )}
@@ -136,19 +136,19 @@ export function SpotGrid() {
 
       {/* Detail drawer */}
       {selected && (
-        <div className="animate-fade-in bg-surface-2 border border-border-2 rounded-xl p-5">
+        <div className="animate-fade-in bg-surface border border-border-2 rounded-xl p-5 shadow-card-md">
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-xs text-muted uppercase tracking-wider mb-1">Vaga {selected.number}</p>
               {selected.status === 'occupied' ? (
-                <p className="plate text-xl text-white">{selected.plate}</p>
+                <p className="plate text-xl text-slate-900">{selected.plate}</p>
               ) : (
-                <p className="text-base font-medium text-spot-free">Livre</p>
+                <p className="text-base font-semibold text-green-600">Livre</p>
               )}
             </div>
             <button
               onClick={() => setSelected(null)}
-              className="text-muted-2 hover:text-white transition-colors"
+              className="text-muted hover:text-slate-900 transition-colors"
             >
               <X size={16} />
             </button>
@@ -160,20 +160,20 @@ export function SpotGrid() {
                 <p className="text-xs text-muted mb-1 flex items-center gap-1">
                   <Car size={11} /> Veículo
                 </p>
-                <p className="text-sm text-white font-medium">{selected.model}</p>
+                <p className="text-sm text-slate-900 font-semibold">{selected.model}</p>
               </div>
               <div className="bg-surface-3 rounded-lg p-3">
                 <p className="text-xs text-muted mb-1 flex items-center gap-1">
                   <Clock size={11} /> Tempo
                 </p>
-                <p className="text-sm text-white font-medium">{selected.duration}</p>
-                <p className="text-xs text-muted-2">desde {selected.entryTime}</p>
+                <p className="text-sm text-slate-900 font-semibold">{selected.duration}</p>
+                <p className="text-xs text-muted">desde {selected.entryTime}</p>
               </div>
               <div className="bg-surface-3 rounded-lg p-3">
                 <p className="text-xs text-muted mb-1 flex items-center gap-1">
                   <CreditCard size={11} /> Estimativa
                 </p>
-                <p className="text-sm text-accent font-bold">{selected.estimatedAmount}</p>
+                <p className="text-sm text-amber-600 font-bold">{selected.estimatedAmount}</p>
               </div>
             </div>
           )}

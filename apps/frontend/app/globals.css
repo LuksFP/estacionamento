@@ -13,7 +13,7 @@
   }
 
   body {
-    @apply bg-background text-slate-100 font-sans;
+    @apply bg-background text-slate-900 font-sans;
   }
 
   ::-webkit-scrollbar {
@@ -40,15 +40,15 @@
   }
 
   .stat-value {
-    @apply text-2xl font-bold text-white tabular-nums;
+    @apply text-2xl font-bold text-slate-900 tabular-nums;
   }
 
   .page-header {
-    @apply px-6 py-5 border-b border-border;
+    @apply px-6 py-5 border-b border-border bg-surface;
   }
 
   .page-title {
-    @apply text-xl font-semibold text-white;
+    @apply text-xl font-semibold text-slate-900;
   }
 
   .page-subtitle {
@@ -56,11 +56,11 @@
   }
 
   .card {
-    @apply bg-surface border border-border rounded-xl p-5;
+    @apply bg-surface border border-border rounded-xl p-5 shadow-card;
   }
 
   .card-sm {
-    @apply bg-surface border border-border rounded-lg p-4;
+    @apply bg-surface border border-border rounded-lg p-4 shadow-card;
   }
 
   .btn-primary {
@@ -70,50 +70,50 @@
   }
 
   .btn-secondary {
-    @apply bg-surface-2 hover:bg-surface-3 border border-border text-white
+    @apply bg-surface hover:bg-surface-3 border border-border text-slate-700
            text-sm px-4 py-2.5 rounded-lg transition-colors duration-150
-           inline-flex items-center gap-2;
+           inline-flex items-center gap-2 shadow-card;
   }
 
   .btn-ghost {
-    @apply text-muted hover:text-white hover:bg-surface-2 text-sm px-3 py-2
+    @apply text-muted hover:text-slate-900 hover:bg-surface-3 text-sm px-3 py-2
            rounded-lg transition-colors duration-150 inline-flex items-center gap-2;
   }
 
   .btn-danger {
-    @apply bg-red-500/10 hover:bg-red-500/20 border border-red-500/20
-           text-red-400 text-sm px-4 py-2.5 rounded-lg transition-colors
+    @apply bg-red-50 hover:bg-red-100 border border-red-200
+           text-red-600 text-sm px-4 py-2.5 rounded-lg transition-colors
            duration-150 inline-flex items-center gap-2;
   }
 
   .input {
-    @apply w-full bg-surface-2 border border-border text-white placeholder-muted-2
-           text-sm px-3 py-2.5 rounded-lg outline-none transition-colors
-           focus:border-accent focus:ring-1 focus:ring-accent/30;
+    @apply w-full bg-surface border border-border text-slate-900 placeholder-muted-2
+           text-sm px-3 py-2.5 rounded-lg outline-none transition-colors shadow-sm
+           focus:border-accent focus:ring-2 focus:ring-accent/20;
   }
 
   .label {
-    @apply block text-xs font-medium text-muted mb-1.5 uppercase tracking-wider;
+    @apply block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wider;
   }
 
   .badge-free {
-    @apply inline-flex items-center gap-1.5 text-xs font-medium text-green-400
-           bg-green-400/10 px-2 py-0.5 rounded-full;
+    @apply inline-flex items-center gap-1.5 text-xs font-medium text-green-700
+           bg-green-100 px-2 py-0.5 rounded-full;
   }
 
   .badge-occupied {
-    @apply inline-flex items-center gap-1.5 text-xs font-medium text-red-400
-           bg-red-400/10 px-2 py-0.5 rounded-full;
+    @apply inline-flex items-center gap-1.5 text-xs font-medium text-red-700
+           bg-red-100 px-2 py-0.5 rounded-full;
   }
 
   .badge-paid {
-    @apply inline-flex items-center text-xs font-medium text-green-400
-           bg-green-400/10 px-2 py-0.5 rounded-full;
+    @apply inline-flex items-center text-xs font-medium text-green-700
+           bg-green-100 px-2 py-0.5 rounded-full;
   }
 
   .badge-open {
-    @apply inline-flex items-center text-xs font-medium text-amber-400
-           bg-amber-400/10 px-2 py-0.5 rounded-full;
+    @apply inline-flex items-center text-xs font-medium text-amber-700
+           bg-amber-100 px-2 py-0.5 rounded-full;
   }
 
   .table-row {
@@ -125,6 +125,6 @@
   }
 
   .table-head {
-    @apply px-4 py-3 text-xs font-medium text-muted uppercase tracking-wider text-left;
+    @apply px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-left;
   }
 }

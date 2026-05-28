@@ -17,31 +17,32 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left panel - decorative */}
-      <div className="hidden lg:flex w-1/2 bg-surface border-r border-border flex-col p-10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.08),transparent_60%)]" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      {/* Left panel — brand amber */}
+      <div className="hidden lg:flex w-5/12 bg-accent flex-col p-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(0,0,0,0.12),transparent_70%)]" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full translate-y-1/3 -translate-x-1/4" />
 
         <div className="relative">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center">
-              <ParkingSquare size={18} className="text-black" strokeWidth={2.5} />
+            <div className="w-10 h-10 bg-black/15 rounded-xl flex items-center justify-center">
+              <ParkingSquare size={20} className="text-white" strokeWidth={2.5} />
             </div>
-            <span className="text-lg font-bold text-white">ParkOS</span>
+            <span className="text-xl font-bold text-white">ParkOS</span>
           </div>
 
-          <h2 className="text-3xl font-bold text-white leading-tight mb-3">
-            Controle total do seu estacionamento
+          <h2 className="text-4xl font-bold text-white leading-tight mb-4">
+            Controle total do seu estacionamento.
           </h2>
-          <p className="text-muted text-base leading-relaxed max-w-sm">
-            Entrada e saída de veículos, caixa em tempo real, relatórios completos e painel de vagas ao vivo.
+          <p className="text-amber-100 text-base leading-relaxed max-w-xs">
+            Entrada, saída, caixa em tempo real e painel de vagas ao vivo — tudo em um só lugar.
           </p>
         </div>
 
-        {/* Grid preview decoration */}
+        {/* Mini spot grid decoration */}
         <div className="mt-auto relative">
-          <p className="text-xs text-muted-2 uppercase tracking-wider mb-3">Painel de vagas</p>
-          <div className="grid grid-cols-10 gap-1.5 max-w-xs">
+          <p className="text-xs text-amber-200 uppercase tracking-wider font-medium mb-3">Painel de vagas</p>
+          <div className="grid grid-cols-10 gap-1.5 max-w-[260px]">
             {Array.from({ length: 50 }, (_, i) => {
               const occupied = [2, 6, 11, 14, 17, 21, 24, 30, 33, 36, 40, 43, 46, 48].includes(i)
               const blocked = [9, 41].includes(i)
@@ -51,41 +52,39 @@ export default function LoginPage() {
                   className={[
                     'aspect-square rounded',
                     blocked
-                      ? 'bg-spot-blocked/30'
+                      ? 'bg-black/20'
                       : occupied
-                        ? 'bg-spot-occupied/50'
-                        : 'bg-spot-free/30',
+                        ? 'bg-white/30'
+                        : 'bg-white/10',
                   ].join(' ')}
                 />
               )
             })}
           </div>
           <div className="flex items-center gap-4 mt-3">
-            <span className="flex items-center gap-1.5 text-xs text-muted">
-              <span className="w-2 h-2 rounded-sm bg-spot-free/50" />
-              27 livres
+            <span className="flex items-center gap-1.5 text-xs text-amber-100">
+              <span className="w-2 h-2 rounded-sm bg-white/20" /> 27 livres
             </span>
-            <span className="flex items-center gap-1.5 text-xs text-muted">
-              <span className="w-2 h-2 rounded-sm bg-spot-occupied/50" />
-              23 ocupadas
+            <span className="flex items-center gap-1.5 text-xs text-amber-100">
+              <span className="w-2 h-2 rounded-sm bg-white/50" /> 23 ocupadas
             </span>
           </div>
         </div>
       </div>
 
-      {/* Right panel - form */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      {/* Right panel — form */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
             <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center">
               <ParkingSquare size={18} className="text-black" strokeWidth={2.5} />
             </div>
-            <span className="text-lg font-bold text-white">ParkOS</span>
+            <span className="text-lg font-bold text-slate-900">ParkOS</span>
           </div>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-white mb-1">Entrar</h1>
+            <h1 className="text-2xl font-bold text-slate-900 mb-1">Entrar</h1>
             <p className="text-muted text-sm">Acesse o painel de operação</p>
           </div>
 
@@ -97,7 +96,7 @@ export default function LoginPage() {
                 <input
                   type="email"
                   className="input pl-9"
-                  placeholder="operador@estacionamento.com"
+                  placeholder="operador@parkos.com"
                   defaultValue="operador@parkos.com"
                   required
                 />
@@ -118,7 +117,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-2 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-2 hover:text-slate-700 transition-colors"
                 >
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -128,11 +127,11 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full justify-center mt-6 py-3"
+              className="btn-primary w-full justify-center mt-6 py-3 text-base"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                   Entrando...
                 </span>
               ) : (
@@ -141,9 +140,9 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="text-xs text-muted-2 text-center mt-8">
+          <p className="text-xs text-muted text-center mt-8">
             Problemas para acessar?{' '}
-            <span className="text-accent cursor-pointer hover:underline">
+            <span className="text-amber-600 cursor-pointer hover:underline font-medium">
               Contate o administrador
             </span>
           </p>

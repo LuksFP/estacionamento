@@ -58,10 +58,10 @@ export default function SaidaPage() {
         </div>
         <div className="p-6 flex items-center justify-center min-h-[400px]">
           <div className="text-center animate-fade-in">
-            <div className="w-16 h-16 bg-green-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle2 size={32} className="text-green-400" />
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle2 size={32} className="text-green-600" />
             </div>
-            <h2 className="text-xl font-bold text-white mb-1">Saída registrada!</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-1">Saída registrada!</h2>
             <p className="text-muted text-sm mb-4">
               {selected.plate} · R${' '}
               {selected.amount.toFixed(2).replace('.', ',')} · {PAYMENT_METHODS.find((m) => m.id === payment)?.label}
@@ -100,7 +100,7 @@ export default function SaidaPage() {
             {query && (
               <button
                 onClick={() => { setQuery(''); setSelected(null) }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-2 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-slate-900"
               >
                 <X size={14} />
               </button>
@@ -119,15 +119,15 @@ export default function SaidaPage() {
                     i > 0 && 'border-t border-border',
                   )}
                 >
-                  <div className="w-8 h-8 bg-surface-2 rounded-lg flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 bg-surface-3 rounded-lg flex items-center justify-center shrink-0">
                     <Car size={15} className="text-muted" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="plate text-white text-sm">{t.plate}</p>
+                    <p className="plate text-slate-900 text-sm">{t.plate}</p>
                     <p className="text-xs text-muted truncate">{t.model} · Vaga {t.spot}</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="text-sm font-medium text-white">R$ {t.amount.toFixed(2).replace('.', ',')}</p>
+                    <p className="text-sm font-semibold text-slate-900">R$ {t.amount.toFixed(2).replace('.', ',')}</p>
                     <p className="text-xs text-muted">{t.duration}</p>
                   </div>
                 </button>
@@ -144,33 +144,32 @@ export default function SaidaPage() {
           {/* Ticket details + checkout */}
           {selected && (
             <div className="space-y-4 animate-fade-in">
-              {/* Vehicle card */}
               <div className="card border-border-2">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <p className="text-xs text-muted uppercase tracking-wider mb-1">Ticket em aberto</p>
-                    <p className="plate text-2xl text-white">{selected.plate}</p>
+                    <p className="plate text-2xl text-slate-900">{selected.plate}</p>
                     <p className="text-sm text-muted mt-0.5">{selected.model} · Vaga {selected.spot}</p>
                   </div>
-                  <button onClick={() => setSelected(null)} className="text-muted-2 hover:text-white">
+                  <button onClick={() => setSelected(null)} className="text-muted hover:text-slate-900">
                     <X size={16} />
                   </button>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 mb-5">
-                  <div className="bg-surface-2 rounded-lg p-3">
+                  <div className="bg-surface-3 rounded-lg p-3">
                     <p className="text-xs text-muted mb-1 flex items-center gap-1">
                       <Clock size={11} /> Entrada
                     </p>
-                    <p className="text-sm font-mono text-white">{selected.entryTime}</p>
+                    <p className="text-sm font-mono text-slate-900 font-semibold">{selected.entryTime}</p>
                   </div>
-                  <div className="bg-surface-2 rounded-lg p-3">
+                  <div className="bg-surface-3 rounded-lg p-3">
                     <p className="text-xs text-muted mb-1">Permanência</p>
-                    <p className="text-sm text-white font-medium">{selected.duration}</p>
+                    <p className="text-sm text-slate-900 font-semibold">{selected.duration}</p>
                   </div>
-                  <div className="bg-surface-2 rounded-lg p-3">
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
                     <p className="text-xs text-muted mb-1">Valor</p>
-                    <p className="text-base font-bold text-accent">
+                    <p className="text-base font-bold text-amber-600">
                       R$ {selected.amount.toFixed(2).replace('.', ',')}
                     </p>
                   </div>
@@ -186,10 +185,10 @@ export default function SaidaPage() {
                         type="button"
                         onClick={() => setPayment(id)}
                         className={cn(
-                          'flex items-center justify-center gap-2 py-2.5 rounded-lg border text-sm font-medium transition-all',
+                          'flex items-center justify-center gap-2 py-2.5 rounded-lg border text-sm font-semibold transition-all',
                           payment === id
-                            ? 'bg-accent-subtle border-accent/40 text-accent'
-                            : 'bg-surface-2 border-border text-muted hover:text-white hover:border-border-2',
+                            ? 'bg-amber-50 border-amber-300 text-amber-700'
+                            : 'bg-surface border-border text-muted hover:text-slate-900 hover:border-border-2',
                         )}
                       >
                         <Icon size={15} />
@@ -206,7 +205,7 @@ export default function SaidaPage() {
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                      <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                       Processando...
                     </span>
                   ) : (

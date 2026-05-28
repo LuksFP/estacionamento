@@ -35,18 +35,18 @@ const MOCK_TICKETS = [
 ]
 
 const STATS = [
-  { label: 'Faturamento', value: 'R$ 11.990', sub: 'na semana', icon: TrendingUp, color: 'text-accent' },
-  { label: 'Veículos', value: '324', sub: 'atendidos', icon: Car, color: 'text-blue-400' },
-  { label: 'Ticket Médio', value: 'R$ 36,99', sub: 'por veículo', icon: Clock, color: 'text-green-400' },
-  { label: 'Taxa Média', value: '62%', sub: 'de ocupação', icon: Percent, color: 'text-purple-400' },
+  { label: 'Faturamento', value: 'R$ 11.990', sub: 'na semana', icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
+  { label: 'Veículos', value: '324', sub: 'atendidos', icon: Car, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200' },
+  { label: 'Ticket Médio', value: 'R$ 36,99', sub: 'por veículo', icon: Clock, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
+  { label: 'Taxa Média', value: '62%', sub: 'de ocupação', icon: Percent, color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-200' },
 ]
 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-surface-2 border border-border rounded-lg px-3 py-2 text-sm">
+    <div className="bg-surface border border-border rounded-lg px-3 py-2 text-sm shadow-card-md">
       <p className="text-muted mb-0.5">{label}</p>
-      <p className="text-white font-bold">
+      <p className="text-slate-900 font-bold">
         R$ {payload[0].value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
       </p>
     </div>
@@ -76,10 +76,10 @@ export default function RelatoriosPage() {
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+              className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
                 period === p
-                  ? 'bg-accent-subtle border-accent/40 text-accent'
-                  : 'bg-surface border-border text-muted hover:text-white hover:bg-surface-2'
+                  ? 'bg-amber-50 border-amber-300 text-amber-700'
+                  : 'bg-surface border-border text-muted hover:text-slate-900 hover:bg-surface-3'
               }`}
             >
               {p}
@@ -89,36 +89,38 @@ export default function RelatoriosPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-4 gap-4">
-          {STATS.map(({ label, value, sub, icon: Icon, color }) => (
-            <div key={label} className="card-sm">
+          {STATS.map(({ label, value, sub, icon: Icon, color, bg, border }) => (
+            <div key={label} className={`card-sm border ${border}`}>
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-muted uppercase tracking-wider">{label}</p>
-                <Icon size={14} className={color} />
+                <p className="text-xs text-muted uppercase tracking-wider font-semibold">{label}</p>
+                <div className={`${bg} p-1.5 rounded-lg`}>
+                  <Icon size={14} className={color} />
+                </div>
               </div>
               <p className="stat-value">{value}</p>
-              <p className="text-xs text-muted-2 mt-1">{sub}</p>
+              <p className="text-xs text-muted mt-1">{sub}</p>
             </div>
           ))}
         </div>
 
         {/* Chart */}
         <div className="card">
-          <h2 className="text-sm font-semibold text-white mb-5">Faturamento por Dia</h2>
+          <h2 className="text-sm font-semibold text-slate-900 mb-5">Faturamento por Dia</h2>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={CHART_DATA} barSize={32}>
               <XAxis
                 dataKey="day"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#8892a6', fontSize: 12 }}
+                tick={{ fill: '#64748b', fontSize: 12 }}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#8892a6', fontSize: 12 }}
+                tick={{ fill: '#64748b', fontSize: 12 }}
                 tickFormatter={(v) => `R$${(v / 1000).toFixed(0)}k`}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.04)' }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
               <Bar dataKey="revenue" fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -126,13 +128,13 @@ export default function RelatoriosPage() {
 
         {/* Table */}
         <div className="card p-0 overflow-hidden">
-          <div className="px-5 py-4 border-b border-border">
-            <h2 className="text-sm font-semibold text-white">
+          <div className="px-5 py-4 border-b border-border bg-surface">
+            <h2 className="text-sm font-semibold text-slate-900">
               Histórico de Tickets · {period}
             </h2>
           </div>
           <table className="w-full">
-            <thead className="border-b border-border bg-surface-2/50">
+            <thead className="border-b border-border bg-surface-2">
               <tr>
                 <th className="table-head">Placa</th>
                 <th className="table-head">Veículo</th>
@@ -147,29 +149,29 @@ export default function RelatoriosPage() {
               {MOCK_TICKETS.map((t) => (
                 <tr key={t.plate + t.entry} className="table-row">
                   <td className="table-cell">
-                    <span className="plate text-white">{t.plate}</span>
+                    <span className="plate text-slate-900">{t.plate}</span>
                   </td>
                   <td className="table-cell text-muted">{t.model}</td>
                   <td className="table-cell font-mono text-xs text-muted">{t.entry}</td>
                   <td className="table-cell font-mono text-xs text-muted">{t.exit}</td>
                   <td className="table-cell text-muted">{t.duration}</td>
                   <td className="table-cell">
-                    <span className="text-xs bg-surface-3 text-muted px-2 py-0.5 rounded">
+                    <span className="text-xs bg-surface-3 border border-border text-muted px-2 py-0.5 rounded font-medium">
                       {t.method}
                     </span>
                   </td>
-                  <td className="table-cell text-right font-medium text-white">
+                  <td className="table-cell text-right font-semibold text-slate-900">
                     R$ {t.amount.toFixed(2).replace('.', ',')}
                   </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot className="border-t border-border-2 bg-surface-2/50">
+            <tfoot className="border-t border-border-2 bg-surface-3">
               <tr>
-                <td colSpan={6} className="table-cell text-xs text-muted font-medium">
+                <td colSpan={6} className="table-cell text-xs text-muted font-semibold">
                   Total · {MOCK_TICKETS.length} tickets
                 </td>
-                <td className="table-cell text-right font-bold text-white">
+                <td className="table-cell text-right font-bold text-slate-900">
                   R$ {MOCK_TICKETS.reduce((s, t) => s + t.amount, 0).toFixed(2).replace('.', ',')}
                 </td>
               </tr>

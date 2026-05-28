@@ -9,37 +9,40 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#080a0f',
+        background: '#f1f5f9',
         surface: {
-          DEFAULT: '#0e1118',
-          2: '#141820',
-          3: '#1c2030',
+          DEFAULT: '#ffffff',
+          2: '#f8fafc',
+          3: '#f1f5f9',
         },
         border: {
-          DEFAULT: '#1a2030',
-          2: '#232c42',
+          DEFAULT: '#e2e8f0',
+          2: '#cbd5e1',
         },
         muted: {
-          DEFAULT: '#8892a6',
-          2: '#48566a',
+          DEFAULT: '#64748b',
+          2: '#94a3b8',
         },
         accent: {
           DEFAULT: '#f59e0b',
           hover: '#d97706',
           light: '#fcd34d',
-          subtle: 'rgba(245, 158, 11, 0.12)',
+          subtle: 'rgba(245, 158, 11, 0.10)',
         },
         'spot-free': '#22c55e',
         'spot-occupied': '#ef4444',
-        'spot-blocked': '#2d3748',
+        'spot-blocked': '#cbd5e1',
         'spot-reserved': '#3b82f6',
       },
       fontFamily: {
         sans: ['var(--font-sora)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
+      boxShadow: {
+        card: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+        'card-md': '0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04)',
+      },
       animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in': 'fadeIn 0.2s ease-out',
       },
       keyframes: {
